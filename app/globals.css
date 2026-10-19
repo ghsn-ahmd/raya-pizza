@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* الألوان كقنوات RGB لدعم الشفافية مع Tailwind (فاتح/داكن) */
+:root {
+  --bg: 255 255 255;
+  --surface: 247 246 243;
+  --surface-2: 238 237 233;
+  --fg: 17 17 17;
+  --muted: 96 96 96;
+  --border: 228 226 221;
+  --brand: 215 25 32;
+  --brand-strong: 168 14 22;
+  --brand-fg: 255 255 255;
+  --ink: 17 17 17;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: 14 14 14;
+  --surface: 24 24 24;
+  --surface-2: 36 36 36;
+  --fg: 246 246 246;
+  --muted: 166 166 166;
+  --border: 46 46 46;
+  --brand: 238 48 55;
+  --brand-strong: 255 92 98;
+  --brand-fg: 255 255 255;
+  --ink: 246 246 246;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg font-sans text-base text-fg antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-extrabold tracking-tight;
+  }
+  ::selection {
+    background: rgb(var(--brand) / 0.25);
+  }
+  /* حلقة تركيز واضحة للوحة المفاتيح */
+  :focus-visible {
+    outline: 2px solid rgb(var(--brand));
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .section-y {
+    @apply py-16 sm:py-24;
+  }
+  .card {
+    @apply rounded-lg border border-border bg-surface shadow-soft;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-sm font-bold text-brand;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply h-0.5 w-6 rounded-full bg-brand;
+  }
+  /* نقش خفيف يذكّر بقوائم المطعم */
+  .dots-bg {
+    background-image: radial-gradient(rgb(var(--fg) / 0.08) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
